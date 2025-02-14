@@ -17,7 +17,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             background-color: #ffebee; /* Fondo rosa claro */
             font-family: 'Arial', sans-serif;
             overflow: hidden; /* Evita el desplazamiento */
@@ -49,11 +49,12 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             position: relative;
             z-index: 1; /* Asegura que el contenido esté sobre los efectos */
+            max-width: 90%; /* Ajusta el ancho máximo para móviles */
         }
 
         h1 {
             color: #e91e63; /* Rosa fuerte */
-            font-size: 2.5em;
+            font-size: 2em; /* Tamaño de fuente más pequeño para móviles */
             white-space: nowrap; /* Evita saltos de línea */
             overflow: hidden; /* Oculta el texto hasta que se escriba */
             border-right: 2px solid #e91e63; /* Efecto de cursor */
@@ -74,7 +75,8 @@
 
         p {
             color: #f48fb1; /* Rosa pastel */
-            font-size: 1.2em;
+            font-size: 1em; /* Tamaño de fuente más pequeño para móviles */
+            margin: 10px 0;
         }
 
         .gif-container {
@@ -82,7 +84,7 @@
         }
 
         .gif-container img {
-            width: 200px; /* Tamaño del GIF */
+            width: 150px; /* Tamaño del GIF más pequeño para móviles */
             border-radius: 10px; /* Bordes redondeados */
         }
 
@@ -123,7 +125,7 @@
         .heart {
             position: absolute;
             bottom: -50px; /* Comienza desde abajo de la pantalla */
-            font-size: 30px; /* Tamaño del corazón */
+            font-size: 24px; /* Tamaño del corazón más pequeño para móviles */
             color: #e91e63; /* Color del corazón */
             animation: float 8s infinite ease-in;
         }
@@ -131,6 +133,22 @@
         @keyframes float {
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        /* Media queries para responsividad */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.5em; /* Tamaño de fuente más grande para tablets y computadoras */
+            }
+            p {
+                font-size: 1.2em; /* Tamaño de fuente más grande para tablets y computadoras */
+            }
+            .gif-container img {
+                width: 200px; /* Tamaño del GIF más grande para tablets y computadoras */
+            }
+            .heart {
+                font-size: 30px; /* Tamaño del corazón más grande para tablets y computadoras */
+            }
         }
     </style>
 </head>
