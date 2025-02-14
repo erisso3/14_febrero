@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Romántica - 14 de Febrero</title>
+    <!-- Animate.css (CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Font Awesome (CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Confetti.js (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffebee; /* Fondo rosa claro */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Evita el desplazamiento */
+            position: relative;
+        }
+
+        /* Efecto de niebla */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: fog 10s infinite linear;
+        }
+
+        @keyframes fog {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 0; }
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1; /* Asegura que el contenido esté sobre los efectos */
+        }
+
+        h1 {
+            color: #e91e63; /* Rosa fuerte */
+            font-size: 2.5em;
+            white-space: nowrap; /* Evita saltos de línea */
+            overflow: hidden; /* Oculta el texto hasta que se escriba */
+            border-right: 2px solid #e91e63; /* Efecto de cursor */
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        /* Animación de máquina de escribir */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* Efecto de cursor parpadeante */
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #e91e63; }
+        }
+
+        p {
+            color: #f48fb1; /* Rosa pastel */
+            font-size: 1.2em;
+        }
+
+        .gif-container {
+            margin-top: 20px; /* Espacio entre el texto y el GIF */
+        }
+
+        .gif-container img {
+            width: 200px; /* Tamaño del GIF */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+
+        /* Efecto de lluvia de pétalos */
+        .petal {
+            position: absolute;
+            top: -50px;
+            font-size: 20px;
+            color: #e91e63;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Efecto de arcoíris */
+        .rainbow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            opacity: 0.2;
+            z-index: -1;
+            animation: rainbow 10s infinite;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Corazones flotantes */
+        .heart {
+            position: absolute;
+            bottom: -50px; /* Comienza desde abajo de la pantalla */
+            font-size: 30px; /* Tamaño del corazón */
+            color: #e91e63; /* Color del corazón */
+            animation: float 8s infinite ease-in;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efecto de arcoíris -->
+    <div class="rainbow"></div>
+
+    <div class="container">
+        <!-- Título con efecto de máquina de escribir -->
+        <h1>¡Feliz Día de San Valentín! 💖</h1>
+        <p>Te quiero mucho amor ❤️✨.</p>
+
+        <!-- Contenedor para el GIF -->
+        <div class="gif-container">
+            <img src="https://i.pinimg.com/originals/c2/11/29/c21129c8123db01d7c60f5e3fb9c81f6.gif" alt="GIF romántico">
+        </div>
+    </div>
+
+    <!-- Contenedor para los pétalos -->
+    <div id="petalContainer"></div>
+
+    <!-- Contenedor para los corazones -->
+    <div id="heartContainer"></div>
+
+    <script>
+        // Efecto de confeti al cargar la página
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+
+        // Función para crear pétalos
+        function createPetal() {
+            const petalContainer = document.getElementById('petalContainer');
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.innerHTML = '🌸'; // Emoji de flor
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 5 + 3 + 's'; // Duración aleatoria
+            petalContainer.appendChild(petal);
+
+            // Eliminar el pétalo después de que termine la animación
+            setTimeout(() => {
+                petal.remove();
+            }, 8000); // 8 segundos
+        }
+
+        // Generar pétalos cada cierto tiempo
+        setInterval(createPetal, 500); // Un pétalo cada 0.5 segundos
+
+        // Función para crear corazones
+        function createHeart() {
+            const heartContainer = document.getElementById('heartContainer');
+            const heart = document.createElement('i');
+            heart.classList.add('heart', 'fas', 'fa-heart', 'animate__animated', 'animate__bounceIn');
+
+            // Posición horizontal aleatoria
+            heart.style.left = Math.random() * 100 + 'vw';
+
+            // Tamaño aleatorio
+            const size = Math.random() * 30 + 20; // Entre 20px y 50px
+            heart.style.fontSize = size + 'px';
+
+            // Duración de la animación aleatoria
+            heart.style.animationDuration = Math.random() * 6 + 4 + 's'; // Entre 4s y 10s
+
+            // Agregar el corazón al contenedor
+            heartContainer.appendChild(heart);
+
+            // Eliminar el corazón después de que termine la animación
+            setTimeout(() => {
+                heart.remove();
+            }, 10000); // 10 segundos
+        }
+
+        // Generar corazones cada cierto tiempo
+        setInterval(createHeart, 500); // Un corazón cada 0.5 segundos
+    </script>
+</body>
+</html>
